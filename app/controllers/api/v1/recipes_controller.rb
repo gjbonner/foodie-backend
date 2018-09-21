@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
-  skip_before_action :authorized, only: [:index, :search_recipes]
+  skip_before_action :authorized, only: [:index, :search_recipes, :create_recipes]
 
   def index
     recipes = Recipe.all
@@ -13,8 +13,18 @@ class Api::V1::RecipesController < ApplicationController
     render json: response
   end
 
+  def create_recipes
+    @recipe = Recipe.create(params[:recipe_obj])
+      if @recipe.valid?
+      @recipe.save
+      render json: { success: 'recipe saved' }, status: :accepted
+    else
+      render json: { error: 'failed' }, status: :failed
+    end
+  end
+
   private
   def recipe_params
-    params.require(:recipe).permit(:ingredients)
+    params.require(:recipe).permit(:ingredients, :recipe_obj, :id)
   end
 end

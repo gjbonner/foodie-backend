@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       get '/recipes', to: 'recipes#index'
       #get '/result', to: 'recipes#search_recipes'
       post '/search', to: 'recipes#search_recipes'
+      post '/save', to: 'recipes#create_recipes'
     end
   end
 end
