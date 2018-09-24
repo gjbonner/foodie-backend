@@ -14,7 +14,7 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def create_recipes
-    @recipe = Recipe.create(params[:recipe_obj])
+    @recipe = Recipe.create(recipe_params)
       if @recipe.valid?
       @recipe.save
       render json: { success: 'recipe saved' }, status: :accepted
@@ -25,6 +25,6 @@ class Api::V1::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:recipe).permit(:ingredients, :recipe_obj, :id)
+    params.require(:recipe).permit(:ingredients, :recipe_obj, :recipeName, :rating, :imageURL, :sweet, :salty, :bitter, :piquant)
   end
 end

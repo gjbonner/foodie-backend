@@ -1,4 +1,4 @@
 class Like < ApplicationRecord
-  has_one :user
-  has_one :recipe
+  belongs_to :user
+  belongs_to :recipe
 end
