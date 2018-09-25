@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       #get '/result', to: 'recipes#search_recipes'
       post '/search', to: 'recipes#search_recipes'
       post '/save', to: 'recipes#create_recipes'
+      get '/likes', to: 'likes#index'
     end
   end
 end
