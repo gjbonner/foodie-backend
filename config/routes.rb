@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post '/search', to: 'recipes#search_recipes'
       post '/save', to: 'recipes#create_recipes'
       get '/likes', to: 'likes#index'
+      post '/likes', to: 'likes#create_like'
     end
   end
 end

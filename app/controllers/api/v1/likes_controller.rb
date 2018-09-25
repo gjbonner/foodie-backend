@@ -1,8 +1,24 @@
 class Api::V1::LikesController < ApplicationController
-  skip_before_action :authorized, only: [:index]
+  skip_before_action :authorized, only: [:index, :create_like]
 
   def index
-    like  = Like.first
-    render json: like.recipe
+    likes = Like.all
+    recipes = likes.map{ |r| r.recipe }
+    render json: recipes
+  end
+
+  def create_like
+    like = Like.create(like_params)
+    if like.valid?
+      like.save
+      render json: { success: 'like saved' }, status: :accepted
+    else
+      render json: { error: 'failed' }, status: :failed
+    end
+  end
+  
+  private
+  def like_params
+    params.require(:like).permit(:user_id, :recipe_id)
   end
 end
