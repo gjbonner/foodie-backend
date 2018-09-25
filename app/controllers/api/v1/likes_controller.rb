@@ -16,9 +16,9 @@ class Api::V1::LikesController < ApplicationController
       render json: { error: 'failed' }, status: :failed
     end
   end
-  
+
   private
   def like_params
-    params.require(:like).permit(:user_id, :recipe_id)
+    params.permit(:user_id, :recipe_id, :alt_id_id, :like)
   end
 end
