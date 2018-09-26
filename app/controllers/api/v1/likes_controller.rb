@@ -1,5 +1,5 @@
 class Api::V1::LikesController < ApplicationController
-  skip_before_action :authorized, only: [:index, :create_like]
+  skip_before_action :authorized, only: [:index, :create_like, :delete_like]
 
   def index
     likes = Like.all
@@ -19,8 +19,18 @@ class Api::V1::LikesController < ApplicationController
     end
   end
 
+  def delete_like
+    byebug
+    recipe = Recipe.find_by(delete_params)
+  end
+
 
   private
+
+  def delete_params
+    params.require(:recipe).permit(:id)
+  end
+
   def recipe_params
     params.require(:new_recipe).permit(:imageURL, :ingredients, :recipeName, :rating, :bitter, :salty, :sweet, :piquant, :meaty, :url, :alt_id, :course, :rCourse, :rCuisine)
   end

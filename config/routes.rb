@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       post '/save', to: 'recipes#create_recipes'
       get '/likes', to: 'likes#index'
       post '/likes', to: 'likes#create_like'
+      delete '/likes', to: 'likes#delete_like'
     end
   end
 end
