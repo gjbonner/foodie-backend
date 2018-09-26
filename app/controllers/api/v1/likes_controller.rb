@@ -8,6 +8,7 @@ class Api::V1::LikesController < ApplicationController
   end
 
   def create_like
+    debugger
     like = Like.create(like_params)
     if like.valid?
       like.save
@@ -19,6 +20,6 @@ class Api::V1::LikesController < ApplicationController
 
   private
   def like_params
-    params.permit(:user_id, :recipe_id, :alt_id_id, :like)
+    params.permit(:user_id, :alt_id_id, :like)
   end
 end
