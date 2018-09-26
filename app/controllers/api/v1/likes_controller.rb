@@ -8,18 +8,20 @@ class Api::V1::LikesController < ApplicationController
   end
 
   def create_like
-    debugger
-    like = Like.create(like_params)
-    if like.valid?
+    recipe = Recipe.create(recipe_params)
+    like = Like.create(user_id: 1, recipe_id: recipe.id)
+    if like.valid? && recipe.valid?
       like.save
+      recipe.save
       render json: { success: 'like saved' }, status: :accepted
     else
       render json: { error: 'failed' }, status: :failed
     end
   end
 
+
   private
-  def like_params
-    params.permit(:user_id, :alt_id_id, :like)
+  def recipe_params
+    params.require(:new_recipe).permit(:imageURL, :ingredients, :recipeName, :rating, :bitter, :salty, :sweet, :piquant, :meaty, :url, :alt_id, :course, :rCourse, :rCuisine)
   end
 end
