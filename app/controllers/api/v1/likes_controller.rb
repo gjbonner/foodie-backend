@@ -20,8 +20,9 @@ class Api::V1::LikesController < ApplicationController
   end
 
   def delete_like
-    byebug
     recipe = Recipe.find_by(delete_params)
+    recipe.destroy
+    render json: { success: 'like deleted' }, status: :accepted
   end
 
 
