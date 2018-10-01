@@ -7,7 +7,8 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def search_recipes
-    url = 'http://api.yummly.com/v1/api/recipes?_app_id='+ENV['recipe_app_id']+'&_app_key='+ENV['recipe_api_key']+'&q='+params[:ingredients]
+    url = 'http://api.yummly.com/v1/api/recipes?_app_id='+ENV['recipe_app_id']+'&_app_key='+ENV['recipe_api_key']+'&q='+params[:ingredients]+params[:allergies]
+    byebug
     request = RestClient.get(url)
     response = JSON.parse(request)
     render json: response
@@ -25,6 +26,6 @@ class Api::V1::RecipesController < ApplicationController
 
   private
   def recipe_params
-    params.require(:new_recipe).permit(:ingredients, :recipeName, :rating, :imageURL, :sweet, :salty, :bitter, :piquant, :url, :alt_id, :rCuisine, :rCourse, :course)
+    params.require(:new_recipe).permit(:ingredients, :recipeName, :rating, :imageURL, :sweet, :salty, :bitter, :piquant, :url, :alt_id, :rCuisine, :rCourse, :course, :allergies)
   end
 end
