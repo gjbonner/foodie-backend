@@ -7,8 +7,7 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def search_recipes
-    url = 'http://api.yummly.com/v1/api/recipes?_app_id='+ENV['recipe_app_id']+'&_app_key='+ENV['recipe_api_key']+'&q='+params[:ingredients]+params[:allergies]
-    byebug
+    url = 'http://api.yummly.com/v1/api/recipes?_app_id='+ENV['recipe_app_id']+'&_app_key='+ENV['recipe_api_key']+'&q='+params[:ingredients]+'&maxResult=8'+params[:allergies]
     request = RestClient.get(url)
     response = JSON.parse(request)
     render json: response
